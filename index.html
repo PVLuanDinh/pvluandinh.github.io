@@ -117,14 +117,9 @@ html { scrollbar-color: var(--violet) var(--glass); }
 .slot .lab { display: flex; flex-direction: column; justify-content: space-between; padding: 12px 12px 10px; border-right: 1px dashed rgba(233,228,239,.25); transition: background .3s; }
 .slot .nm { font: 800 1.05rem/1.1 var(--display); font-variation-settings: "wdth" 72; text-transform: uppercase; color: var(--box-ink); }
 .slot .st { font-family: var(--label); font-size: .88rem; line-height: 1.25; }
-.slot .stain { opacity: .38; transition: opacity .4s;
-  background:
-    radial-gradient(circle at 20% 30%, var(--c1) 0 3px, transparent 4px) 0 0 / 23px 19px,
-    radial-gradient(circle at 60% 70%, var(--c1) 0 2px, transparent 3px) 0 0 / 17px 23px,
-    radial-gradient(ellipse at 40% 50%, var(--c2) 0 1px, transparent 6px) 0 0 / 11px 9px,
-    var(--c0); }
+.slot .stain { display: block; width: 100%; height: 100%; opacity: .45; transition: opacity .4s; }
 .slot:hover { border-color: var(--eosin); }
-.slot:hover .stain { opacity: .7; }
+.slot:hover .stain { opacity: .75; }
 .slot:focus-visible { outline: 2px solid var(--eosin); outline-offset: 3px; }
 .slot[aria-pressed="true"] { border: 1px solid rgba(255,255,255,.5); color: var(--ink-2); transform: translateY(-8px); box-shadow: 0 18px 30px -16px rgba(0,0,0,.8); }
 .slot[aria-pressed="true"] .lab { background: var(--frost); border-right-color: rgba(23,21,28,.1); }
@@ -162,7 +157,7 @@ footer { border-top: 1px solid var(--rule); padding: 26px 0 40px; font-family: v
   .tissue { aspect-ratio: 16 / 9; }
   .notes, .cols { grid-template-columns: 1fr; gap: 22px; }
 }
-@media (max-width: 600px) { .rack { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .rack { grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; } .slot { grid-template-columns: 1fr; grid-template-rows: 44px auto; aspect-ratio: auto; } .slot .stain { grid-row: 1; } .slot .lab { grid-row: 2; border-right: 0; min-height: 96px; } }
 @media (hover: none) { .tissue .hint .h-hover { display: none; } }
 @media (hover: hover) { .tissue .hint .h-touch { display: none; } }
 @media (max-width: 420px) { .wrap { padding: 0 16px; } .fields { grid-template-columns: 1fr; } }
@@ -235,10 +230,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <h2 class="sec" id="box">The slide box</h2>
     <p class="lede">Tools and practices from the workflow behind the engine. Pick a slide to read its label.</p>
     <div class="rack" role="group" aria-label="Projects">
-      <button class="slot" aria-pressed="true" data-i="0" style="--c0:#f3dbe6;--c1:#3d2266;--c2:#d6487e"><span class="lab"><span class="nm">agent-board</span><span class="st">slide 02 · open source · MIT</span></span><span class="stain" aria-hidden="true"></span></button>
-      <button class="slot" aria-pressed="false" data-i="1" style="--c0:#f1e3c8;--c1:#1d1610;--c2:#a86a2c"><span class="lab"><span class="nm">Claude Odysseus Optimizer</span><span class="st">slide 03 · public repo</span></span><span class="stain" aria-hidden="true"></span></button>
-      <button class="slot" aria-pressed="false" data-i="2" style="--c0:#dfe8f5;--c1:#1f3f8f;--c2:#6c8fd1"><span class="lab"><span class="nm">Claude Code Router</span><span class="st">slide 04 · local LLM infra</span></span><span class="stain" aria-hidden="true"></span></button>
-      <button class="slot" aria-pressed="false" data-i="3" style="--c0:#f6dcd6;--c1:#9b2333;--c2:#e07a6a"><span class="lab"><span class="nm">Agentic Build Loop</span><span class="st">slide 05 · methodology</span></span><span class="stain" aria-hidden="true"></span></button>
+      <button class="slot" aria-pressed="true" data-i="0" style="--c0:#f3dbe6;--c1:#3d2266;--c2:#d6487e"><span class="lab"><span class="nm">agent-board</span><span class="st">slide 02 · open source · MIT</span></span><canvas class="stain" aria-hidden="true"></canvas></button>
+      <button class="slot" aria-pressed="false" data-i="1" style="--c0:#f1e3c8;--c1:#1d1610;--c2:#a86a2c"><span class="lab"><span class="nm">Claude Odysseus Optimizer</span><span class="st">slide 03 · public repo</span></span><canvas class="stain" aria-hidden="true"></canvas></button>
+      <button class="slot" aria-pressed="false" data-i="2" style="--c0:#dfe8f5;--c1:#1f3f8f;--c2:#6c8fd1"><span class="lab"><span class="nm">Claude Code Router</span><span class="st">slide 04 · set&nbsp;up · local LLM</span></span><canvas class="stain" aria-hidden="true"></canvas></button>
+      <button class="slot" aria-pressed="false" data-i="3" style="--c0:#f6dcd6;--c1:#9b2333;--c2:#e07a6a"><span class="lab"><span class="nm">Agentic Build Loop</span><span class="st">slide 05 · methodology</span></span><canvas class="stain" aria-hidden="true"></canvas></button>
     </div>
     <div class="detail" id="detail" aria-live="polite"></div>
     <noscript>
@@ -290,8 +285,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       body: "Coordinates multiple AI agents across sessions and tools: a shared message board, blind peer review, and a scorer that re-runs verification instead of trusting agent reports. Ships custom hooks that improve AI workflows, installable on any Claude account in one command." },
     { name: "Claude Odysseus Optimizer", st: "Python · static analysis", url: "https://github.com/PVLuanDinh/claude-odysseus-optimization",
       body: "Builds a queryable knowledge graph across codebases with AST parsing and static analysis, and returns subgraphs sized for LLM context windows instead of raw file dumps." },
-    { name: "Claude Code Router", st: "local LLM infrastructure", url: null,
-      body: "Set up and run a self-hosted router that sends AI-coding-client traffic to a local Ollama model instead of the cloud; installed as a global CLI and used live for cost control and privacy." },
+    { name: "Claude Code Router", st: "local LLM infrastructure · open-source router, set up and run", url: null,
+      body: "Set up and run the open-source claude-code-router, self-hosted, so AI-coding-client traffic goes to a local Ollama model instead of the cloud; installed as a global CLI and used live for cost control and privacy." },
     { name: "Agentic Build Loop", st: "methodology", url: null,
       body: "Repeatable research, build, verify (CI), ship loops, one safe slice per cycle: multi-agent orchestration that routes subtasks by model tier, persistent cross-session memory, and knowledge-graph navigation. Nothing merges without passing the full CI gate." }
   ];
@@ -304,7 +299,38 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     detail.innerHTML = `<h3>${esc(s.name)}</h3><p class="st">${esc(s.st)}</p><p>${esc(s.body)}</p>` +
       (s.url ? `<p style="margin-top:12px"><a href="${s.url}">${esc(s.url.replace("https://", ""))}</a></p>` : "");
   }
-  slots.forEach((b, i) => b.addEventListener("click", () => show(i)));
+  slots.forEach((b, i) => b.addEventListener("click", () => {
+    show(i);
+    const r = detail.getBoundingClientRect();
+    if (r.top > innerHeight - 80 || r.bottom < 0)
+      detail.scrollIntoView({ block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }));
+  /* each slide carries a static specimen in its own stain, seeded so it never changes between visits */
+  function specimen(cvs, seed) {
+    const cs = getComputedStyle(cvs.parentElement), c0 = cs.getPropertyValue("--c0").trim(), c1 = cs.getPropertyValue("--c1").trim(), c2 = cs.getPropertyValue("--c2").trim();
+    const r = cvs.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1), w = r.width, h = r.height;
+    if (!w || !h) return;
+    cvs.width = w * d; cvs.height = h * d; const g = cvs.getContext("2d"); g.scale(d, d);
+    let s = seed; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    g.fillStyle = c0; g.fillRect(0, 0, w, h);
+    g.globalAlpha = .22; g.fillStyle = c2;
+    for (let i = 0; i < w * h / 40; i++) { g.beginPath(); g.ellipse(rnd() * w, rnd() * h, 1 + rnd() * 6, .5 + rnd() * 1.4, rnd() * 3.2, 0, 7); g.fill(); }
+    g.globalAlpha = 1;
+    const n = Math.round(w * h / 140), pts = [];
+    for (let i = 0; i < n * 5 && pts.length < n; i++) {
+      const x = rnd() * w, y = rnd() * h, rr = 1.6 + rnd() * rnd() * 4.2;
+      if (pts.every(p => Math.hypot(p[0] - x, p[1] - y) > p[2] + rr + 2)) pts.push([x, y, rr]);
+    }
+    for (const [x, y, rr] of pts) {
+      g.fillStyle = c1; g.globalAlpha = .55 + rnd() * .4;
+      g.beginPath(); g.ellipse(x, y, rr * (1 + rnd() * .5), rr, rnd() * 3.2, 0, 7); g.fill();
+      g.globalAlpha = .9; g.fillStyle = "#120a18"; g.beginPath(); g.arc(x + .3, y, rr * .35, 0, 7); g.fill();
+    }
+    g.globalAlpha = 1;
+  }
+  const stains = [...document.querySelectorAll(".slot .stain")];
+  const paintAll = () => stains.forEach((c, i) => specimen(c, 7919 * (i + 3)));
+  new ResizeObserver(paintAll).observe(document.querySelector(".rack"));
   show(0);
 
   /* ---------- tissue: a toy spiking field that grows and prunes ---------- */
