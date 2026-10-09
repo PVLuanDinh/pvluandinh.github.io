@@ -3,156 +3,414 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Luan Dinh · AI Engineer</title>
-<meta name="description" content="Luan Dinh: Computer Science (AI) student and AI engineer building a self-growing, brain-inspired AI engine, local LLM infrastructure and multi-agent workflows.">
+<title>Luan Dinh · Neural &amp; AI systems</title>
+<meta name="description" content="Luan Dinh, Computer Science (AI) at DePaul. Builds a self-growing, neurally-inspired AI engine on spiking neural networks, plus open-source tools for multi-agent AI development.">
+<meta name="theme-color" content="#e6eaeb">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Cutive+Mono&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #fbfbf9; --fg: #1d2125; --muted: #5d656d; --rule: #d9dcd8;
-  --accent: #1f6f66; --card: #ffffff; --chip: #eef3f1;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #121517; --fg: #e6e8ea; --muted: #9aa3ab; --rule: #2a3034;
-          --accent: #5cc2b3; --card: #181c1f; --chip: #1f2a28; }
+  --glass: #e6eaeb;       /* bench glass, page ground */
+  --stage: #fbfdfd;       /* light stage, backlit */
+  --frost: #f4f5f2;       /* frosted label */
+  --ink: #17151c;         /* label ink */
+  --ink-2: #4a4655;       /* secondary ink, violet-tinted */
+  --violet: #5b2a86;      /* cresyl violet (Nissl) */
+  --violet-deep: #2a1640;
+  --eosin: #d6487e;       /* eosin pink: spikes, the one hot accent */
+  --box: #1c1a22;         /* slide box interior */
+  --box-ink: #e9e4ef;
+  --box-ink-2: #b9b1c7;
+  --rule: #c6ced1;
+  --shadow: 0 1px 1px rgba(23,21,28,.06), 0 8px 24px -10px rgba(23,21,28,.28);
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --label: "Cutive Mono", "Courier New", monospace;
 }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--fg);
-  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-main { max-width: 760px; margin: 0 auto; padding: 56px 20px 72px; }
-a { color: var(--accent); text-underline-offset: 3px; }
-header h1 { font-size: 2.4rem; line-height: 1.1; margin: 0 0 6px; letter-spacing: -0.02em; }
-header .role { color: var(--muted); margin: 0 0 16px; }
-header nav a { margin-right: 16px; font-weight: 600; }
-h2 { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
-  border-bottom: 1px solid var(--rule); padding-bottom: 6px; margin: 48px 0 18px; }
-.project { background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
-  padding: 18px 20px; margin-bottom: 16px; }
-.project h3 { margin: 0; font-size: 1.1rem; }
-.meta { color: var(--muted); font-size: .9rem; margin: 2px 0 8px; }
-.project ul { margin: 0; padding-left: 20px; }
-.project li { margin: 4px 0; }
-.skills dt { font-weight: 700; margin-top: 10px; }
-.skills dd { margin: 2px 0 0; color: var(--fg); }
-.chip { display: inline-block; background: var(--chip); border-radius: 999px; padding: 1px 10px;
-  font-size: .8rem; color: var(--muted); margin-left: 6px; vertical-align: 2px; }
-.edu p { margin: 0 0 10px; }
-footer { color: var(--muted); font-size: .85rem; margin-top: 56px; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--glass); color: var(--ink);
+  font: 17px/1.6 var(--display); font-variation-settings: "wdth" 100;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--eosin); color: #fff; }
+a { color: var(--violet); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--eosin); }
+:focus-visible { outline: 2px solid var(--eosin); outline-offset: 3px; border-radius: 2px; }
+html { scrollbar-color: var(--violet) var(--glass); }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+.label { font-family: var(--label); letter-spacing: .02em; }
+
+/* ---------- index card (box lid) ---------- */
+.lid { padding: 40px 0 28px; }
+.card {
+  display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: end;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 31px, #d9e3ea 31px 32px) 0 64px / 100% calc(100% - 64px) no-repeat,
+    var(--frost);
+  border-top: 6px solid var(--violet);
+  padding: 28px 32px 30px; box-shadow: var(--shadow);
+}
+.card h1 {
+  font-size: clamp(3rem, 9vw, 6rem); line-height: .9; margin: 0 0 18px;
+  font-weight: 900; font-variation-settings: "wdth" 62; letter-spacing: -0.02em; text-transform: uppercase;
+}
+.fields { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 0 18px; font-size: 1.05rem; line-height: 32px; }
+.fields dt { font-family: var(--label); color: var(--ink-2); }
+.fields dd { margin: 0; }
+.actions { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+  font: 700 1rem/1 var(--display); font-variation-settings: "wdth" 85; text-transform: uppercase; letter-spacing: .04em;
+  padding: 14px 20px; border: 2px solid var(--ink); color: var(--ink); background: transparent;
+  transition: background .25s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1);
+}
+.btn svg { width: 18px; height: 18px; }
+.btn.primary { background: var(--violet); border-color: var(--violet); color: #fff; }
+.btn:hover { background: var(--eosin); border-color: var(--eosin); color: #fff; }
+.photo { width: 168px; height: 168px; object-fit: cover; filter: grayscale(1) contrast(1.05); box-shadow: var(--shadow); border: 6px solid #fff; }
+
+/* ---------- light stage ---------- */
+.stage {
+  background: radial-gradient(120% 90% at 50% 40%, var(--stage) 55%, #eef2f3 100%);
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 44px 0 56px;
+}
+.slide {
+  position: relative; display: grid; grid-template-columns: minmax(220px, 27%) 1fr;
+  aspect-ratio: 3 / 1; width: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(214,226,230,.35));
+  border: 1px solid rgba(91,42,134,.18); border-radius: 6px;
+  box-shadow: 0 2px 2px rgba(23,21,28,.05), 0 26px 50px -24px rgba(23,21,28,.38), inset 0 1px 0 rgba(255,255,255,.9);
+  overflow: hidden;
+}
+.slide-label {
+  background: var(--frost); border-right: 1px solid rgba(23,21,28,.08);
+  padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; font-family: var(--label); font-size: .95rem; line-height: 1.35;
+  background-image: radial-gradient(rgba(23,21,28,.05) 1px, transparent 1px); background-size: 3px 3px;
+}
+.slide-label .no { color: var(--violet); font-size: .85rem; }
+.slide-label h2 { font: 800 1.45rem/1.05 var(--display); font-variation-settings: "wdth" 70; text-transform: uppercase; margin: 2px 0 6px; letter-spacing: -0.01em; }
+.slide-label .meta { color: var(--ink-2); }
+.slide-label .meta b { color: var(--ink); font-weight: 400; }
+.tissue { position: relative; }
+.tissue canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
+.tissue .hint { position: absolute; right: 14px; bottom: 10px; font-family: var(--label); font-size: .8rem; color: var(--ink-2); background: rgba(251,253,253,.8); padding: 2px 8px; pointer-events: none; }
+.readout { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 14px; font-family: var(--label); font-size: .9rem; color: var(--ink-2); }
+.readout span b { color: var(--violet); font-weight: 400; font-variant-numeric: tabular-nums; }
+.caveat { margin: 6px 0 0; font-size: .82rem; color: var(--ink-2); }
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 48px; margin-top: 36px; }
+.notes h3 { font: 800 1.05rem/1.2 var(--display); font-variation-settings: "wdth" 80; text-transform: uppercase; letter-spacing: .03em; margin: 0 0 6px; color: var(--violet-deep); }
+.notes p { margin: 0; max-width: 62ch; }
+
+/* ---------- slide box ---------- */
+.boxsec { background: var(--box); color: var(--box-ink); padding: 64px 0 72px; }
+.boxsec h2.sec { font: 900 clamp(2rem, 4.4vw, 3.2rem)/1 var(--display); font-variation-settings: "wdth" 62; text-transform: uppercase; margin: 0 0 8px; letter-spacing: -0.01em; }
+.boxsec .lede { color: var(--box-ink-2); margin: 0 0 34px; max-width: 60ch; }
+.rack { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; padding: 14px; background: #121016; box-shadow: inset 0 2px 10px rgba(0,0,0,.6); }
+.slot {
+  all: unset; box-sizing: border-box; cursor: pointer; position: relative; display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 128px; padding: 14px 14px 12px; border: 1px dashed rgba(233,228,239,.35); border-radius: 4px; color: var(--box-ink-2);
+  transition: transform .45s cubic-bezier(.16,1,.3,1), background .3s, border-color .3s, color .3s;
+}
+.slot .no { font-family: var(--label); font-size: .82rem; }
+.slot .nm { font: 800 1.1rem/1.1 var(--display); font-variation-settings: "wdth" 75; text-transform: uppercase; color: var(--box-ink); }
+.slot .st { font-family: var(--label); font-size: .82rem; }
+.slot:hover { border-color: var(--eosin); }
+.slot[aria-pressed="true"] { border: 1px solid transparent; background: var(--frost); color: var(--ink-2); transform: translateY(-8px); box-shadow: 0 18px 30px -16px rgba(0,0,0,.8); }
+.slot[aria-pressed="true"] .nm { color: var(--ink); }
+.slot[aria-pressed="true"] .no { color: var(--violet); }
+.detail { margin-top: 26px; padding: 26px 28px; background: #26232e; border-top: 3px solid var(--eosin); min-height: 150px; }
+.detail h3 { font: 800 1.5rem/1.1 var(--display); font-variation-settings: "wdth" 70; text-transform: uppercase; margin: 0 0 4px; }
+.detail .st { font-family: var(--label); color: var(--box-ink-2); margin: 0 0 14px; }
+.detail p { margin: 0; max-width: 72ch; }
+.detail a { color: #f0a8c4; }
+.detail a:hover { color: #fff; }
+
+/* ---------- bench record ---------- */
+.record { padding: 64px 0 40px; }
+.record h2 { font: 900 clamp(1.8rem, 3.6vw, 2.6rem)/1 var(--display); font-variation-settings: "wdth" 62; text-transform: uppercase; margin: 0 0 22px; }
+.cols { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; }
+.entry { border-top: 1px solid var(--ink); padding-top: 12px; margin-bottom: 30px; }
+.entry .row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.entry h3 { font: 800 1.15rem/1.25 var(--display); margin: 0; }
+.entry .when { font-family: var(--label); color: var(--ink-2); white-space: nowrap; }
+.entry .where { color: var(--ink-2); margin: 0 0 8px; }
+.entry ul { margin: 0; padding-left: 18px; }
+.entry li { margin: 4px 0; }
+.skills { margin: 0; }
+.skills dt { font: 800 .95rem/1.2 var(--display); font-variation-settings: "wdth" 80; text-transform: uppercase; letter-spacing: .03em; color: var(--violet-deep); margin-top: 16px; }
+.skills dd { margin: 4px 0 0; }
+footer { border-top: 1px solid var(--rule); padding: 26px 0 40px; font-family: var(--label); color: var(--ink-2); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .card { grid-template-columns: 1fr; padding: 22px 20px 24px; }
+  .photo { width: 112px; height: 112px; order: -1; }
+  .slide { grid-template-columns: 1fr; aspect-ratio: auto; }
+  .slide-label { border-right: 0; border-bottom: 1px solid rgba(23,21,28,.08); }
+  .tissue { aspect-ratio: 16 / 9; }
+  .notes, .cols { grid-template-columns: 1fr; gap: 22px; }
+  .rack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) { .wrap { padding: 0 16px; } .fields { grid-template-columns: 1fr; line-height: 1.5; } .fields dd { margin-bottom: 6px; } }
 </style>
 </head>
 <body>
-<main>
-<header>
-  <h1>Luan Dinh</h1>
-  <p class="role">AI Engineer · Computer Science (AI), DePaul University · Chicago, IL</p>
-  <nav><a href="https://github.com/PVLuanDinh">GitHub</a><a href="#projects">Projects</a><a href="#skills">Skills</a></nav>
+<!--
+THESIS: Each project is a labeled specimen slide pulled from a neuroscience lab's slide box; refuses the hero + project-card developer portfolio.
+OWN-WORLD: bench-glass gray ground, backlit light stage, frosted typed slide labels (Cutive Mono), cresyl-violet cell stain with eosin-pink spikes, a near-black slide box with dashed empty slots; condensed Archivo caps for names.
+STORY: A recruiter learns in seconds that Luan builds brain-inspired AI systems with engineering discipline, watches the engine's mechanism live on the slide, then opens the resume or GitHub.
+FIRST VIEWPORT: index card with name at display scale, three typed fields, Resume (primary) and GitHub buttons, headshot right; below, the SNDL slide fills the width, its tissue a live spiking-cell canvas that grows and prunes cells; pointer stimulates.
+FORM: Histology Slide Box, assigned candidate 5 of 7; seed key c41f14b1.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<header class="lid">
+  <div class="wrap">
+    <div class="card">
+      <div>
+        <h1>Luan Dinh</h1>
+        <dl class="fields">
+          <dt>field</dt><dd>Neurally-inspired AI &amp; ML engineering</dd>
+          <dt>study</dt><dd>B.S. Computer Science (AI), DePaul University, June 2026</dd>
+          <dt>based</dt><dd>Chicago, IL</dd>
+        </dl>
+        <div class="actions">
+          <a class="btn primary" href="assets/luan-dinh-resume.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>Resume (PDF)</a>
+          <a class="btn" href="https://github.com/PVLuanDinh">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>GitHub</a>
+        </div>
+      </div>
+      <img class="photo" src="assets/luan.jpg" width="168" height="168" alt="Portrait of Luan Dinh">
+    </div>
+  </div>
 </header>
 
-<h2>About</h2>
-<p>Computer Science (AI) student and AI engineer who ships rigorously engineered systems. I'm building a self-growing,
-brain-inspired AI engine on spiking neural networks, local LLM infrastructure, and the agent-orchestration workflow behind
-them, including custom Claude Code skills and hooks that keep AI agents coordinated and verified.</p>
-<p>Focus: honest metrics, tested code, software that ships.</p>
+<main>
+<section class="stage" aria-labelledby="sndl">
+  <div class="wrap">
+    <div class="slide">
+      <div class="slide-label">
+        <h2 id="sndl">Spiking Neural Data Lake</h2>
+        <span class="meta"><b>slide</b> 01 · flagship</span>
+        <span class="meta"><b>stain</b> Python · PyTorch · STDP · e-prop</span>
+        <span class="meta"><b>status</b> 2026 · private repo, available on request</span>
+      </div>
+      <div class="tissue">
+        <canvas id="tissue" role="img" aria-label="Animated field of spiking cells: cells fire, spikes spread to neighbors, new cells grow in and quiet ones are pruned"></canvas>
+        <span class="hint">move over the tissue to stimulate it</span>
+      </div>
+    </div>
+    <div class="readout" aria-live="off">
+      <span>cells <b id="r-cells">0</b></span>
+      <span>spikes / s <b id="r-rate">0</b></span>
+      <span>grown <b id="r-grown">0</b></span>
+      <span>pruned in sleep <b id="r-pruned">0</b></span>
+    </div>
+    <p class="caveat label">A small live illustration of the engine's idea (spike, grow, prune), not its code.</p>
+    <div class="notes">
+      <div><h3>What it is</h3><p>A brain-inspired AI engine that grows its own neurons. When its spiking network cannot solve a problem it adds neurons, passes them through a separate “liquid” reservoir network so they learn how they relate to what it already knows, then runs a sleep cycle that prunes and saves the result to one permanent data store it can recall from.</p></div>
+      <div><h3>System design</h3><p>Two cooperating networks inside a single durable data lake, trained with local, biologically plausible learning rules (STDP, e-prop) instead of backpropagation; a safety layer with an emergency stop on every robot-arm (SO-101) command; and a live dashboard for monitoring and demos.</p></div>
+      <div><h3>Research method</h3><p>Every engine component is tested as a pre-registered experiment with controls and statistical tests before it merges. Built in parallel by a team of AI agents I direct, with peer review and one integrator; the final milestone removes each connection to prove it is needed.</p></div>
+      <div><h3>Engineering</h3><p>About 390 automated self-checks plus pytest; GitHub Actions CI on Ubuntu and Windows with free-threaded Python 3.14; 350+ tagged releases.</p></div>
+    </div>
+  </div>
+</section>
 
-<h2 id="projects">Projects</h2>
+<section class="boxsec" aria-labelledby="box">
+  <div class="wrap">
+    <h2 class="sec" id="box">The slide box</h2>
+    <p class="lede">Tools that came out of building the engine. Pick a slide to read its label.</p>
+    <div class="rack" role="group" aria-label="Projects">
+      <button class="slot" aria-pressed="true" data-i="0"><span class="nm">agent-board</span><span class="st">slide 02 · open source · MIT</span></button>
+      <button class="slot" aria-pressed="false" data-i="1"><span class="nm">Claude Odysseus Optimizer</span><span class="st">slide 03 · public repo</span></button>
+      <button class="slot" aria-pressed="false" data-i="2"><span class="nm">Claude Code Router</span><span class="st">slide 04 · local LLM infra</span></button>
+      <button class="slot" aria-pressed="false" data-i="3"><span class="nm">Agentic Build Loop</span><span class="st">slide 05 · methodology</span></button>
+    </div>
+    <div class="detail" id="detail" aria-live="polite"></div>
+    <noscript>
+      <div class="detail"><p>agent-board: github.com/PVLuanDinh/agent-board. Claude Odysseus Optimizer: github.com/PVLuanDinh/claude-odysseus-optimization.</p></div>
+    </noscript>
+  </div>
+</section>
 
-<article class="project">
-  <h3>Spiking Neural Data Lake (SNDL) <span class="chip">private repo, available on request</span></h3>
-  <p class="meta">Python · system design · multi-agent development</p>
-  <ul>
-    <li>Brain-inspired AI engine that grows its own neurons: when its spiking network cannot solve a problem it adds neurons,
-      passes them through a separate “liquid” reservoir network so they learn how they relate to what it already knows, then
-      runs a sleep cycle that prunes and saves the result to one permanent data store it can recall from.</li>
-    <li>System design: two cooperating networks inside a single durable data lake; a safety layer that sends every robot-arm
-      (SO-101) command through one checked path with an emergency stop; and design rules checked automatically in CI.</li>
-    <li>Built in parallel by a team of AI agents I direct: one engine component per agent on its own git branch, peer review
-      before merge, one integrator, and a full test battery on every merged batch. The final milestone is a whole-engine test
-      that removes each connection to prove it is needed.</li>
-    <li>~390 automated self-checks plus pytest; GitHub Actions CI on Ubuntu and Windows with free-threaded Python 3.14;
-      350+ tagged releases.</li>
-  </ul>
-</article>
-
-<article class="project">
-  <h3><a href="https://github.com/PVLuanDinh/agent-board">agent-board</a> <span class="chip">open source · MIT</span></h3>
-  <p class="meta">Claude Code skill · Python</p>
-  <ul>
-    <li>Claude Code skill that coordinates multiple AI agents across sessions and tools: append-only hash-chained message
-      board, file claims, blind peer review, and an anti-gaming scorer that re-runs verification instead of trusting agent reports.</li>
-    <li>Configures custom skills and harness hooks to improve AI workflows, e.g. a Stop hook that keeps a lead agent working
-      instead of idling, installed into any Claude account with one idempotent command; stdlib-only with a reachable-red
-      self-check suite.</li>
-  </ul>
-</article>
-
-<article class="project">
-  <h3><a href="https://github.com/PVLuanDinh/claude-odysseus-optimization">Claude Odysseus Optimizer</a></h3>
-  <p class="meta">Python · static analysis</p>
-  <ul>
-    <li>Builds a unified, queryable knowledge graph across multiple codebases (god nodes, community detection, inferred
-      cross-repo bridge edges) via AST parsing and static analysis.</li>
-    <li>Returns scoped subgraphs sized for LLM context windows instead of raw file dumps.</li>
-  </ul>
-</article>
-
-<article class="project">
-  <h3>Claude Code Router</h3>
-  <p class="meta">Local LLM infrastructure</p>
-  <ul>
-    <li>Self-hosted router that redirects AI-coding-client traffic to a local Ollama model instead of the cloud; installed
-      globally as a CLI and run live for cost control and privacy.</li>
-  </ul>
-</article>
-
-<article class="project">
-  <h3>Agentic Build-Loop Engineering</h3>
-  <p class="meta">Methodology</p>
-  <ul>
-    <li>Repeatable research → build → verify (CI) → ship loops, one safe slice per cycle: multi-agent orchestration routing
-      subtasks by model tier, persistent cross-session memory, and knowledge-graph navigation. Nothing merges without
-      passing the full CI gate.</li>
-  </ul>
-</article>
-
-<h2>Experience</h2>
-<article class="project">
-  <h3>AI Engineer &amp; Website Developer</h3>
-  <p class="meta">SAMOVIC Ltd. · Remote · Aug 2024 – Present</p>
-  <ul>
-    <li>Built a customer-facing website with an AI assistant that answers FAQs and guides customers via hyperlinks, part of
-      revitalizing an aging company’s digital presence.</li>
-    <li>Built an AI scanner that converts architectural sketches into rough, editable 3D models in Blender; raised
-      sketch-to-3D throughput from ~3 to 10+ models per day.</li>
-  </ul>
-</article>
-<article class="project">
-  <h3>Testing Manager</h3>
-  <p class="meta">Country Guesser Game, group project, DePaul University · Aug 2024 – Nov 2024</p>
-  <ul>
-    <li>Built web apps with React, TypeScript, HTML and CSS; integrated the OpenAI ChatGPT API for real-time decisions and
-      NLP chatbot features.</li>
-    <li>Owned accuracy and performance testing as the team’s testing lead.</li>
-  </ul>
-</article>
-
-<h2>Education</h2>
-<div class="edu">
-  <p><strong>DePaul University</strong>, B.S. Computer Science, Artificial Intelligence · Sep 2022 – Jun 2026</p>
-  <p><strong>VNU-HCM High School for the Gifted</strong>, Ho Chi Minh City · Aug 2019 – Jun 2022</p>
-</div>
-
-<h2 id="skills">Skills</h2>
-<dl class="skills">
-  <dt>Languages</dt><dd>Python (Advanced), Java, JavaScript/TypeScript, C++, SQL, Assembly</dd>
-  <dt>AI / Machine Learning</dt><dd>Neural networks from scratch, deep learning, TensorFlow, PyTorch, snnTorch, spiking neural
-    networks &amp; neuromorphic computing, surrogate-gradient training, STDP, NLP &amp; chatbots, GPU/CUDA training, fp16 mixed precision</dd>
-  <dt>LLMs &amp; Agents</dt><dd>Local LLM serving (Ollama), LLM request routing, retrieval-augmented context, multi-agent
-    orchestration, custom AI skills &amp; hooks (Claude Code), AI build loops, prompt engineering</dd>
-  <dt>Software Engineering</dt><dd>System design &amp; architecture, safety-critical control paths, stdlib-only tool design,
-    GitHub Actions CI, pytest, ruff, pre-commit, test-driven development, semantic versioning &amp; releases, packaging, QA</dd>
-  <dt>Web &amp; APIs</dt><dd>React, TypeScript, HTML, CSS, REST APIs, OpenAI API integration</dd>
-  <dt>Spoken languages</dt><dd>English (bilingual), Vietnamese (native), French (conversational)</dd>
-</dl>
-
-<footer>© 2026 Luan Dinh · <a href="https://github.com/PVLuanDinh">github.com/PVLuanDinh</a></footer>
+<section class="record" aria-labelledby="bench">
+  <div class="wrap">
+    <h2 id="bench">Bench record</h2>
+    <div class="cols">
+      <div>
+        <div class="entry">
+          <div class="row"><h3>AI Engineer &amp; Website Developer</h3><span class="when">Aug 2024 – now</span></div>
+          <p class="where">SAMOVIC Ltd. · Remote (Ho Chi Minh City)</p>
+          <ul>
+            <li>Built a customer-facing website with an AI assistant that answers FAQs and guides customers via hyperlinks.</li>
+            <li>Built an AI scanner that turns architectural sketches into rough, editable 3D models in Blender, raising throughput from about 3 to 10+ models a day.</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <div class="row"><h3>DePaul University</h3><span class="when">2022 – Jun 2026</span></div>
+          <p class="where">B.S. Computer Science, Artificial Intelligence · GPA 3.4</p>
+          <ul><li>Coursework: Machine Learning, Deep Learning, Computational Neuroscience (NEU 256, in progress), Software Projects, Computer Systems, Algorithms.</li></ul>
+        </div>
+      </div>
+      <dl class="skills">
+        <dt>AI &amp; machine learning</dt><dd>Spiking neural networks, STDP, surrogate-gradient training, PyTorch, TensorFlow, snnTorch, deep learning, GPU/CUDA training</dd>
+        <dt>Agents &amp; LLMs</dt><dd>Multi-agent orchestration, custom Claude Code skills &amp; hooks, local LLM serving (Ollama), retrieval-augmented context</dd>
+        <dt>Engineering</dt><dd>System design, safety-critical control paths, GitHub Actions CI, pytest, test-driven development, releases &amp; packaging</dd>
+        <dt>Languages</dt><dd>Python, Java, JavaScript/TypeScript, C++, SQL · English, Vietnamese, French</dd>
+      </dl>
+    </div>
+  </div>
+</section>
 </main>
+
+<footer class="wrap">
+  <span>© 2026 Luan Dinh</span>
+  <span><a href="https://github.com/PVLuanDinh">github.com/PVLuanDinh</a> · <a href="assets/luan-dinh-resume.pdf" download>resume.pdf</a></span>
+</footer>
+
+<script>
+(() => {
+  /* ---------- slide box ---------- */
+  const SLIDES = [
+    { name: "agent-board", st: "Claude Code skill · Python · open source (MIT)", url: "https://github.com/PVLuanDinh/agent-board",
+      body: "Coordinates multiple AI agents across sessions and tools: a shared message board, blind peer review, and a scorer that re-runs verification instead of trusting agent reports. Ships custom hooks that improve AI workflows, installable on any Claude account in one command." },
+    { name: "Claude Odysseus Optimizer", st: "Python · static analysis", url: "https://github.com/PVLuanDinh/claude-odysseus-optimization",
+      body: "Builds a queryable knowledge graph across codebases with AST parsing and static analysis, and returns subgraphs sized for LLM context windows instead of raw file dumps." },
+    { name: "Claude Code Router", st: "local LLM infrastructure", url: null,
+      body: "Self-hosted router that sends AI-coding-client traffic to a local Ollama model instead of the cloud; installed as a global CLI and run live for cost control and privacy." },
+    { name: "Agentic Build Loop", st: "methodology", url: null,
+      body: "Repeatable research, build, verify (CI), ship loops, one safe slice per cycle: multi-agent orchestration that routes subtasks by model tier, persistent cross-session memory, and knowledge-graph navigation. Nothing merges without passing the full CI gate." }
+  ];
+  const detail = document.getElementById("detail");
+  const slots = [...document.querySelectorAll(".slot")];
+  const esc = s => s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  function show(i) {
+    const s = SLIDES[i];
+    slots.forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+    detail.innerHTML = `<h3>${esc(s.name)}</h3><p class="st">${esc(s.st)}</p><p>${esc(s.body)}</p>` +
+      (s.url ? `<p style="margin-top:12px"><a href="${s.url}">${esc(s.url.replace("https://", ""))}</a></p>` : "");
+  }
+  slots.forEach((b, i) => b.addEventListener("click", () => show(i)));
+  show(0);
+
+  /* ---------- tissue: a toy spiking field that grows and prunes ---------- */
+  const cv = document.getElementById("tissue"), ctx = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const el = id => document.getElementById(id);
+  let W = 0, H = 0, dpr = 1, cells = [], bg = null, grown = 0, pruned = 0, spikeLog = [];
+  const MAX = 150, R = 58;
+  let rng = 1234567;
+  const rand = () => (rng = (rng * 16807) % 2147483647) / 2147483647;
+
+  function newCell(x, y, young) {
+    return { x, y, r: 3 + rand() * 3.2, v: rand() * .6, thr: .95 + rand() * .2, flash: 0, act: 1, age: young ? 0 : 1, nb: [] };
+  }
+  function wire() {
+    for (const c of cells) c.nb = cells.filter(d => d !== c && Math.hypot(d.x - c.x, d.y - c.y) < R);
+  }
+  function stainBackground() {
+    bg = document.createElement("canvas"); bg.width = W * dpr; bg.height = H * dpr;
+    const b = bg.getContext("2d"); b.scale(dpr, dpr);
+    b.fillStyle = "#f6e7ee"; b.fillRect(0, 0, W, H);                     // eosin wash
+    for (let i = 0; i < W * H / 90; i++) {                                // fibrous neuropil
+      b.fillStyle = `rgba(214,72,126,${.03 + rand() * .05})`;
+      b.beginPath(); b.ellipse(rand() * W, rand() * H, 1 + rand() * 7, .6 + rand() * 1.6, rand() * Math.PI, 0, 7); b.fill();
+    }
+    const g = b.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * .7);
+    g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(1, "rgba(91,42,134,.10)");
+    b.fillStyle = g; b.fillRect(0, 0, W, H);
+  }
+  function resize() {
+    const r = cv.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
+    W = r.width; H = r.height; if (!W || !H) return;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    rng = 1234567; cells = [];
+    const n = Math.round(Math.min(MAX * .8, W * H / 2400));
+    for (let i = 0; i < n * 6 && cells.length < n; i++) {               // poisson-ish spacing
+      const x = 10 + rand() * (W - 20), y = 10 + rand() * (H - 20);
+      if (cells.every(c => Math.hypot(c.x - x, c.y - y) > 15)) cells.push(newCell(x, y, false));
+    }
+    wire(); stainBackground(); draw();
+  }
+  let pointer = null;
+  cv.addEventListener("pointermove", e => { const r = cv.getBoundingClientRect(); pointer = { x: e.clientX - r.left, y: e.clientY - r.top }; });
+  cv.addEventListener("pointerleave", () => pointer = null);
+  cv.addEventListener("pointerdown", e => { const r = cv.getBoundingClientRect(); grow(e.clientX - r.left, e.clientY - r.top); });
+
+  function grow(x, y) {
+    if (cells.length >= MAX) return;
+    const c = newCell(x ?? 10 + rand() * (W - 20), y ?? 10 + rand() * (H - 20), true);
+    cells.push(c); grown++; wire();
+  }
+  function sleepPrune() {                                                  // prune the quietest cells
+    if (cells.length < 40) return;
+    const quiet = [...cells].filter(c => c.age >= 1).sort((a, b) => a.act - b.act).slice(0, 3);
+    for (const q of quiet) q.dying = 1;
+  }
+  function step(dt, now) {
+    for (const c of cells) {
+      c.age = Math.min(1, c.age + dt * .6);
+      let drive = .18 + rand() * .32;
+      if (rand() < dt * .35) c.v += .75 + rand() * .3;                    // sparse background input: spontaneous spikes
+      if (pointer) { const d = Math.hypot(pointer.x - c.x, pointer.y - c.y); if (d < 70) drive += 3.2 * (1 - d / 70); }
+      c.v += dt * (drive - c.v * .9);
+      c.flash = Math.max(0, c.flash - dt * 2.6);
+      c.act *= Math.pow(.92, dt);
+      if (c.v > c.thr && !c.dying) {
+        c.v = 0; c.flash = 1; c.act += 1; spikeLog.push(now);
+        for (const d of c.nb) d.v += .22 * c.age;                          // spike spreads to neighbours
+      }
+      if (c.dying) c.dying -= dt * .8;
+    }
+    const before = cells.length;
+    cells = cells.filter(c => !(c.dying !== undefined && c.dying <= 0));
+    if (cells.length !== before) { pruned += before - cells.length; wire(); }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    if (bg) ctx.drawImage(bg, 0, 0, W, H);
+    for (const c of cells) {
+      const fade = c.dying !== undefined ? Math.max(0, c.dying) : 1;
+      const a = c.age * fade;
+      if (c.flash > 0) {                                                   // spike halo
+        ctx.fillStyle = `rgba(214,72,126,${.38 * c.flash * a})`;
+        ctx.beginPath(); ctx.arc(c.x, c.y, c.r + 10 * c.flash, 0, 7); ctx.fill();
+      }
+      const g = ctx.createRadialGradient(c.x - c.r * .3, c.y - c.r * .3, 0, c.x, c.y, c.r * 1.3);
+      g.addColorStop(0, `rgba(122,70,170,${.85 * a})`); g.addColorStop(1, `rgba(42,22,64,${.9 * a})`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(c.x, c.y, c.r * 1.15, c.r, (c.x * 13 % 6), 0, 7); ctx.fill();
+      ctx.fillStyle = `rgba(20,10,30,${a})`; ctx.beginPath(); ctx.arc(c.x + .4, c.y - .2, c.r * .38, 0, 7); ctx.fill();
+    }
+  }
+  let last = 0, nextGrow = 0, nextSleep = 0, nextRead = 0, visible = true;
+  function frame(now) {
+    if (!visible) return;
+    const dt = Math.min(.05, (now - last) / 1000 || .016); last = now;
+    if (now > nextGrow) { grow(); nextGrow = now + 1800 + rand() * 1600; }
+    if (now > nextSleep) { sleepPrune(); nextSleep = now + 5200; }
+    step(dt, now); draw();
+    if (now > nextRead) {
+      spikeLog = spikeLog.filter(t => now - t < 1000);
+      el("r-cells").textContent = cells.length; el("r-rate").textContent = spikeLog.length;
+      el("r-grown").textContent = grown; el("r-pruned").textContent = pruned;
+      nextRead = now + 250;
+    }
+    requestAnimationFrame(frame);
+  }
+  new ResizeObserver(resize).observe(cv);
+  resize();
+  if (reduce) {                                                            // one settled frame, no motion
+    for (let i = 0; i < 40; i++) step(.05, i * 50);
+    for (const c of cells) c.flash = rand() < .12 ? .8 : 0;
+    draw(); el("r-cells").textContent = cells.length;
+    document.querySelector(".hint").textContent = "animation paused (reduced motion)";
+  } else {
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) { last = performance.now(); requestAnimationFrame(frame); } }).observe(cv);
+  }
+})();
+</script>
 </body>
 </html>
